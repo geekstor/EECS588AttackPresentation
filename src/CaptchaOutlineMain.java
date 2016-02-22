@@ -8,24 +8,17 @@ import javax.imageio.ImageIO;
 
 import nl.captcha.Captcha;
 import nl.captcha.Captcha.Builder;
-import nl.captcha.backgrounds.FlatColorBackgroundProducer;
 import nl.captcha.backgrounds.GradiatedBackgroundProducer;
 import nl.captcha.backgrounds.SquigglesBackgroundProducer;
-import nl.captcha.gimpy.BlockGimpyRenderer;
 import nl.captcha.gimpy.DropShadowGimpyRenderer;
 import nl.captcha.gimpy.FishEyeGimpyRenderer;
-import nl.captcha.gimpy.RippleGimpyRenderer;
-import nl.captcha.gimpy.ShearGimpyRenderer;
-import nl.captcha.gimpy.StretchGimpyRenderer;
 import nl.captcha.noise.CurvedLineNoiseProducer;
 import nl.captcha.noise.StraightLineNoiseProducer;
 import nl.captcha.text.producer.DefaultTextProducer;
 import nl.captcha.text.renderer.ColoredEdgesWordRenderer;
-import nl.captcha.text.renderer.DefaultWordRenderer;
 
-public class CaptchaMain {
-
-	public String main(boolean test, int length, int width, int height, int back, int straight, int curved, int shadow, int fish, String filename, String dirname) {
+public class CaptchaOutlineMain {
+	public String main(boolean test, int length, int width, int height, int back, int straight, int curved, int shadow, String filename, String dirname) {
 		// TODO Auto-generated method stub
 		Builder builder = new Captcha.Builder(width, height);
 
@@ -41,7 +34,7 @@ public class CaptchaMain {
 		}
 		
 
-		builder.addText(new DefaultTextProducer(length, characters));
+		builder.addText(new DefaultTextProducer(length, characters), new ColoredEdgesWordRenderer());
 		
 		
 		if(back == 0){
@@ -49,9 +42,6 @@ public class CaptchaMain {
 		}
 		if(back == 1){
 			builder.addBackground(new GradiatedBackgroundProducer());
-		}
-		if(back == 2){
-			builder.addBackground(new SquigglesBackgroundProducer());
 		}
 		
 		if(curved == 1){
@@ -61,9 +51,6 @@ public class CaptchaMain {
 			builder.addNoise(new StraightLineNoiseProducer());
 		}
 		
-		if(fish == 1){
-			builder.gimp(new FishEyeGimpyRenderer());
-		}
 		if(shadow == 1){
 			builder.gimp(new DropShadowGimpyRenderer());
 		}

@@ -1,13 +1,10 @@
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.Random;
 
-public class GenerateTestCaptchas {
-
+public class GenerateOutlineTestCaptchas {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CaptchaMain generator = new CaptchaMain();
+		CaptchaOutlineMain generator = new CaptchaOutlineMain();
 		
 		//int num = Integer.parseInt(args[0]);
 		int num = 100;
@@ -32,14 +29,13 @@ public class GenerateTestCaptchas {
 				int length = Math.abs(rand.nextInt())%4 + 5;
 				int width = 220;
 				int height = 52;
-				int back = Math.abs(rand.nextInt())%3;
+				int back = Math.abs(rand.nextInt())%2;
 				int straight = Math.abs(rand.nextInt())%2;
 				int curved = Math.abs(rand.nextInt())%2;
 				int shadow = Math.abs(rand.nextInt())%2;
-				int fish = Math.abs(rand.nextInt())%2;
 				
 
-				generator.main(false, length, width, height, back, straight, curved, shadow, fish, 
+				generator.main(false, length, width, height, back, straight, curved, shadow,
 						Long.toString(timestamp) + '_'
 						+ new Integer(i).toString()
 						+ ".png",
@@ -53,5 +49,4 @@ public class GenerateTestCaptchas {
 			System.out.println("error");
 		}
 	}
-
 }

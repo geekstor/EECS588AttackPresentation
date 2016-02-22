@@ -44,16 +44,17 @@ public class GenerateCaptchas {
 			
 			Random rand = new Random(timestamp % Integer.MAX_VALUE);
 			for(int i = 0; i < num; ++i){
-				int width = 208;
+				int length = Math.abs(rand.nextInt())%4 + 5;
+				int width = 220;
 				int height = 52;
-				int back = rand.nextInt()%3;
-				int straight = rand.nextInt()%2;
-				int curved = rand.nextInt()%2;
-				int shadow = rand.nextInt()%2;
-				int fish = rand.nextInt()%2;
+				int back = Math.abs(rand.nextInt())%3;
+				int straight = Math.abs(rand.nextInt())%2;
+				int curved = Math.abs(rand.nextInt())%2;
+				int shadow = Math.abs(rand.nextInt())%2;
+				int fish = Math.abs(rand.nextInt())%2;
 				
 
-				answer = generator.main(false, width, height, back, straight, curved, shadow, fish, 
+				answer = generator.main(false, length, width, height, back, straight, curved, shadow, fish, 
 						Long.toString(timestamp) + '_'
 						+ new Integer(i).toString()
 						+ ".png",
