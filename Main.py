@@ -32,7 +32,12 @@ for k in labeled_samples:
         labeled_samples[k][i] = tuple([misc.imresize(imread(path + "/" + k + "/" + labeled_samples[k][i][0], mode='RGB'),
                                         size=(128, 16)).flatten()/float(256.0),
                                         labeled_samples[k][i][1]])
-
+training_samples = {}
+validation_samples = {}
+ratio = 0.9
+for k in labeled_samples:
+    training_samples[k] = labeled_samples[k][:int(ratio*len(labeled_samples[k]))]
+    validation_samples[k] = labeled_samples[k][int(ratio*len(labeled_samples[k])):]
 for k in unlabeled_samples:
     for i in range(len(list(unlabeled_samples[k]))):
         unlabeled_samples[k][i] = misc.imresize(imread(path + "/" + k + "/" + unlabeled_samples[k][i], mode='RGB'),
@@ -99,6 +104,7 @@ def get_batch(size, partial_answer=False, step=False):
         return [numpy.array(img_list, dtype=float), answer_list]
     else:
         return [numpy.array(img_list, dtype=float), numpy.array(partial_answer_list), numpy.array(rest_answer_list)]
+
 
 def get_test_batch(size):
     img_list = []
