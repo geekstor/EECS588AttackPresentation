@@ -12,6 +12,7 @@ for possibledir in os.listdir(path):
     if not possibledir.startswith('.'):
         if os.path.isdir(os.path.join(path, possibledir)):
             contents_of_dir = [file for file in os.listdir(os.path.join(path, possibledir))]
+            contents_of_dir.sort()
             if "control.txt" in contents_of_dir:
                 labeled_samples[possibledir] = [file for file in contents_of_dir if ".png" in file or ".jpeg" in file or ".jpg" in file or ".gif" in file]
             else:
@@ -104,8 +105,30 @@ def get_batch(size, partial_answer=False, step=False):
         return [numpy.array(img_list, dtype=float), answer_list]
     else:
         return [numpy.array(img_list, dtype=float), numpy.array(partial_answer_list), numpy.array(rest_answer_list)]
+a,b,c = get_batch(2, True, True)
+print b
+for num in b[0]:
+    if num <= 9:
+        num = num + ord('0')
+    elif num <= (9 + 26):
+        num = num + ord('A') - 10
+    else:
+        num = num + ord('a') - 36
+    
+    print chr(num)
+num = 0
+for i in range(0, 63):
+    if c[0][i] == 1:
+        num = i
+if num <= 9:
+    num = num + ord('0')
+elif num <= (9+26):
+    num = num + ord('A') - 10
+else:
+    num = num + ord('a') - 36
+print chr(num)
 
-
+    
 def get_test_batch(size):
     img_list = []
     for i in range(size):
